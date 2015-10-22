@@ -6,7 +6,8 @@
 package javaprolog;
 import javax.swing.JOptionPane;
 //Api `prolog
-import java.util.Map;
+import java.util.*;
+import javax.swing.UIManager;
 import org.jpl7.JPL.*;
 import org.jpl7.Query;
 import org.jpl7.Term;
@@ -41,9 +42,16 @@ public class JavaProlog {
         Note doo = new Note();                //C
         Note doSostenido = new Note();        //C#
 
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");           
+            new FrameJavaProlog().setVisible(true);
+        }
+        catch (Exception e) {
+             //Se captura el error y no se instancia la GUI
+        }
 
-        //Rammstein du hast - Probando API
- 
+        /* //Rammstein du hast - Probando API
+
         Note miSostenido2 = new Note();
         Note reSostenido2 = new Note();
         Note la2 = new Note();
@@ -76,7 +84,7 @@ public class JavaProlog {
         Play.midi(reSostenido2);
         Play.midi(si2);    
         
-         //Fin du hast
+        */ //Fin du hast
         
         
         //La siguiente linea el comando para conectar con prolog
