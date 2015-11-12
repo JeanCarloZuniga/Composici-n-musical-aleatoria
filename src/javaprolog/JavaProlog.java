@@ -15,19 +15,102 @@ import org.jpl7.Term;
 import jm.music.data.Note;
 import jm.util.Play;
 import jm.JMC;
-
-
+//leer ficheros
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 /**
  *
  * @author Brandon Alvarez
  * @author Jean Carlo Zuniga
  */
 public class JavaProlog {
+    
+    //Dirección de la base de conocimiento de prolog
+    static final String base_prolog = "base_prolog.txt";
+    static final String archivo_prolog = "tarea.pl";
+    
+    public static void cargar_base_prolog()throws FileNotFoundException, IOException
+    {
+        String cadena;
+        //Carga las progresiones existentes
+        String funcion_dinamica = "dynamic escala/1.";
+        Query funcion_dinamica_query = new Query(funcion_dinamica);
+        System.out.println(funcion_dinamica_query.hasSolution() ? "Funcion dinámica cargada" : "Error de funcion dinámica");
+        FileReader lector_archivo = new FileReader(base_prolog);
+        try (BufferedReader buffer_lector = new BufferedReader(lector_archivo)) {
+            while((cadena = buffer_lector.readLine()) != null) 
+            {
+                //Hace el assert en prolog
+                System.out.println("tengo: " + cadena);
+                Query asert_query = new Query(cadena);
+                System.out.println(asert_query.hasSolution() ? "Assert correcto" : "Assert incorrecto");
+            }
+        }
+    }
+    
+    public static void guardar_base_prolog(String asert) throws Exception
+    {
+        try (RandomAccessFile file_escritor = new RandomAccessFile(new File(base_prolog), "rw")) {
+            file_escritor.seek(file_escritor.length());
+            file_escritor.writeBytes(System.getProperty("line.separator"));
+            file_escritor.write(asert.getBytes());
+            file_escritor.close();
+        }
+        //Carga en la base en assert 
+        Query asert_query = new Query(asert);
+        System.out.println(asert_query.hasSolution() ? "Assert correcto" : "Assert incorrecto");
+    }
+    
+    public static void controlador() throws IOException, Exception
+    {
+        //Comando para conectar con prolog
+        String conexion = "consult('" + archivo_prolog + "')";
+        Query conexion_query = new Query(conexion);
+        System.out.println(conexion_query.hasSolution() ? "Conexion establecida" : "Error de conexion");
+        cargar_base_prolog();
+
+        /*
+        Prueba de unidad:
+        
+            *guarda en el archivo y en la base una progresion.
+        
+        String abc = "assert(progresion(b, (b, g, gN, aN, c, cN, e, f))).";
+        guardar_base_prolog(abc);
+        */
+        
+        /*
+        Prueba de unidad:
+        
+            *Consulta de una progresion previamente cargada
+        */
+        String str = "escala(aS2, X)";
+        System.out.print("ESCALA:\n");
+        Query q2 = new Query(str);
+        System.out.println(q2.hasSolution() ? "Consulta atendida" : "Consulta mal");
+
+        while(q2.hasMoreSolutions())
+        {
+            Map<String, Term> solucion = q2.nextSolution();
+            System.out.println(solucion.get("X"));
+            System.out.println(solucion.toString());
+        }  
+        
+    }
+    
+    
+    
+    
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, Exception {
         //Notas musicales a utilizar
         Note si = new Note();                 //B
         Note la = new Note();                 //A
@@ -49,8 +132,8 @@ public class JavaProlog {
         catch (Exception e) {
              //Se captura el error y no se instancia la GUI
         }
-
-        /* //Rammstein du hast - Probando API
+/*
+         //Rammstein du hast - Probando API
 
         Note miSostenido2 = new Note();
         Note reSostenido2 = new Note();
@@ -84,23 +167,9 @@ public class JavaProlog {
         Play.midi(reSostenido2);
         Play.midi(si2);    
         
-        */ //Fin du hast
-        
-        
-        //La siguiente linea el comando para conectar con prolog
-        String conexion = "consult('tarea.pl')";
-        Query conexion_query = new Query(conexion);
-        System.out.println(conexion_query.hasSolution() ? "Conexion establecida" : "Error de conexion");
-        
-        //Ejemplo de union
-        String str = "union([a,c,e],[b,d,f], X)";
-        Query q2 = new Query(str);
-        String n = "";
-        while(q2.hasMoreSolutions())
-        {
-            Map<String, Term> solucion = q2.nextSolution();
-            System.out.println("X = " + solucion.get("X") );
-        }
+         //Fin du hast
+        */
+        //Chords.play();
+        controlador();
     }
-    
 }
