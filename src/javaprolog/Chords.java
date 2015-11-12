@@ -35,7 +35,7 @@ public final class Chords implements JMC {
         //pack the part into a score
         s.addPart(chordsPart);
         s.addPart(melodyPart);
-
+        
 //display the music
 View.show(s);
 
@@ -174,21 +174,21 @@ chordsPart.addCPhrase(chord);
     private static void calculateMelodyProgression() {
         Phrase phr = new Phrase("Twinkle twinkle", 0.0);
         double octavo = 0.4375;
-        int[] pitchArray = {G2,D3,G3,D3,AS3,G3, G2,D3,G3,D3,D4,AS3,G3,    
-                            DS3,G3,AS3,G3,DS4,AS3, DS3,G3,AS3,G3,G4,DS4,AS3,  
-                            C3,G3,DS4,AS3,G4,DS4, C3,G3,DS4,AS3,C5,G4,DS4,
-                            D3,FS3,C4,D4,C4,FS3,  A3, C4, A3,FS4,C4,FS4} ;
-        double[] rhythmArray = {octavo, octavo, octavo, octavo, octavo, octavo*3, 
-                                octavo, octavo, octavo, octavo, octavo, octavo, octavo*2,
-                                
-                                octavo, octavo, octavo, octavo, octavo, octavo*3,
-                                octavo,octavo,octavo,octavo,octavo,octavo,octavo*2,
-                                
-                                octavo, octavo, octavo, octavo, octavo, octavo*3,
-                                octavo, octavo, octavo, octavo, octavo, octavo*3,
-                                
-                                octavo, octavo, octavo, octavo, octavo, octavo*3,
-                                octavo, octavo, octavo, octavo, octavo, octavo*3};
+        int[] pitchArray = {G2,A2,AS2,C3,    G2,A2,AS2,D3,
+            DS3,G3,AS3,G3,DS4,AS3, DS3,G3,AS3,G3,G4,DS4,AS3,
+            C3,G3,DS4,AS3,G4,DS4, C3,G3,DS4,AS3,C5,G4,DS4,
+            D3,FS3,C4,D4,C4,FS3,  A3, C4, A3,FS4,C4,FS4} ;
+        double[] rhythmArray = {octavo, octavo, octavo, octavo*5,
+            octavo, octavo, octavo, octavo*5,
+            
+            octavo, octavo, octavo, octavo, octavo, octavo*3,
+            octavo,octavo,octavo,octavo,octavo,octavo,octavo*2,
+            
+            octavo, octavo, octavo, octavo, octavo, octavo*3,
+            octavo, octavo, octavo, octavo, octavo, octavo*3,
+            
+            octavo, octavo, octavo, octavo, octavo, octavo*3,
+            octavo, octavo, octavo, octavo, octavo, octavo*3};
         phr.addNoteList(pitchArray, rhythmArray);
         melodyPart.add(phr);
     }
