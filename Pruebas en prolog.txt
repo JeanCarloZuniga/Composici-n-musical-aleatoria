@@ -1,0 +1,18 @@
+Pruebas en Prolog.
+
+{Si no está progresión ni ejemplos}
+
+dynamic progresion/1.
+
+assert(progresion(a, (a,a,a))).
+assert(progresion(a, (b,b,b))).
+assert(progresion(a, (c,c,c))).
+assert(progresion(a, (d,d,d))).
+
+Para la función tamano:
+
+	tamano(a, X).    Devolvería 4.
+
+Para la función resultado_especifico:
+
+	resultado_especifico(a, 3, X).    Devolvería (c,c,c).

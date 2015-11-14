@@ -34,11 +34,54 @@ public class JavaProlog {
     //Dirección de la base de conocimiento de prolog
     static final String base_prolog = "base_prolog.txt";
     static final String archivo_prolog = "tarea.pl";
+    static List progresion = new LinkedList();
+    static List escalas = new LinkedList();
     
+    /*
+    EFE:
+    REQ: Que el resultado en prolog se haya asignado a una variable de nombre X
+    MOD:
+    */
+    public static void a_lista(String lista)
+    {
+        String constructora = "";
+        String partes="";
+        for(int i=0; i<lista.length(); i++)
+        {
+            if( (lista.charAt(i) != '\'') && (lista.charAt(i) != 'X')  && (lista.charAt(i) != '=')  && (lista.charAt(i) != '{')  && (lista.charAt(i) != '}') && (lista.charAt(i) != ',') && (lista.charAt(i) != '(') && (lista.charAt(i) != ')'))
+            {
+                constructora = constructora + lista.charAt(i);
+            }
+        }
+        System.out.println("Constructora: " + constructora + "\n Particionada:\n");
+        for(int i=0; i<constructora.length(); i++)
+        {
+            if(constructora.charAt(i) != ' ')
+            {
+                partes = partes + constructora.charAt(i);
+            }
+            else
+            {
+                progresion.add(partes);
+                partes = "";
+            }
+        }
+        
+        //A continuación se imprime la lista para efectos de prueba.
+        progresion.stream().forEach((progresion1) -> {
+            System.out.println(progresion1);
+        });
+    }
+    
+    /*
+    EFE:
+    REQ:
+    MOD:
+    */
     public static void cargar_base_prolog()throws FileNotFoundException, IOException
     {
         String cadena;
-        //Carga las progresiones existentes
+        //Carga las progresion existentes
         String funcion_dinamica = "dynamic escala/1.";
         Query funcion_dinamica_query = new Query(funcion_dinamica);
         System.out.println(funcion_dinamica_query.hasSolution() ? "Funcion dinámica cargada" : "Error de funcion dinámica");
@@ -54,6 +97,11 @@ public class JavaProlog {
         }
     }
     
+    /*
+    EFE:
+    REQ:
+    MOD:
+    */
     public static void guardar_base_prolog(String asert) throws Exception
     {
         try (RandomAccessFile file_escritor = new RandomAccessFile(new File(base_prolog), "rw")) {
@@ -67,6 +115,11 @@ public class JavaProlog {
         System.out.println(asert_query.hasSolution() ? "Assert correcto" : "Assert incorrecto");
     }
     
+    /*
+    EFE:
+    REQ:
+    MOD:
+    */
     public static void controlador() throws IOException, Exception
     {
         //Comando para conectar con prolog
@@ -74,7 +127,6 @@ public class JavaProlog {
         Query conexion_query = new Query(conexion);
         System.out.println(conexion_query.hasSolution() ? "Conexion establecida" : "Error de conexion");
         cargar_base_prolog();
-
         /*
         Prueba de unidad:
         
@@ -98,7 +150,8 @@ public class JavaProlog {
         {
             Map<String, Term> solucion = q2.nextSolution();
             System.out.println(solucion.get("X"));
-            System.out.println(solucion.toString());
+            System.out.println("A LISTA:");
+            a_lista(solucion.toString());
         }  
         
     }

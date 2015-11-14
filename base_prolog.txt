@@ -1,0 +1,13 @@
+assert(escala(d3, (d3, dS3, f3, g3, gS3, b3, c4, d4, dS4, f4, g4, gS4, b4, c5, d5, dS5, f5, g5))).
+assert(escala(c3, (c3, d3, dS3, f3, g3, gS3, b3, c4, d4, dS4, f4, g4, gS4, b4, c5, d5, dS5, f5, g5))).
+assert(escala(cS3, (cS3, dS3, e3, fS3, gS3, a3, c3, cS4, dS4, e4, fS4, gS4, a4, c4, cS5, dS5, e5, fS5, gS5))).
+assert(escala(d3,(d3, e3, f3, g3, a3, aS3, cS3, d4, e4, f4, g4, a4, aS4, cS4, d5, e5, f5, g5, a5))).
+assert(escala(dS, (dS3, f3, fS3, gS3, aS3, b3, d3, dS4, f4, fS4, gS4, aS4, b4, d4, dS5, f5, fS5, gS5, aS5))).
+assert(escala(e2, (e2, fS2, g2, a2, b2, c2, dS2, e3, fS3, g3, a3, b3, c3, dS3, e4, fS4, g4, a4, b4))).
+assert(escala(f2, (f2, g2, gS2, aS2, c2, cS2, e2, f3, g3, gS3, aS3, c3, cS3, e3, f4, g4, gS4, aS4, c4))).
+assert(escala(fS2, (fS2, gS2, a2, b2, cS2, d2, f2, fS3, gS3, a3, b3, cS3, d3, f3, fS4, gS4, a4, b4, cS4))).
+assert(escala(g2, (g2, a2, aS2, c2, d2, dS2, fS2, g3, a3, aS3, c3, d3, dS3, fS3, g4, a4, aS4, c4, d4))).
+assert(escala(gS2, (gS2, aS2, b2, cS2, dS2, e2, g2, gS3, aS3, b3, cS3, dS3, e3, g3, gS4, aS4, b4, cS4, dS4))).
+assert(escala(a2, (a2, b2, c2, d2, e2, f2, gS2, a3, b3, c3, d3, e3, f3, gS3, a4, b4, c4, d4, e4))).
+assert(escala(aS2, (aS2, c2, cS2, dS2, f2, fS2, a2, aS3, c3, cS3, dS3, f3, fS3, a3, aS4, c4, cS4, dS4, f4))).
+assert(escala(b2, (b2, cS2, d2, e2, fS2, g2, aS2, b3, cS3, d3, e3, fS3, g3, aS3, b4, cS4, d4, e4, fS4))).
